@@ -8,18 +8,24 @@ namespace MonteCarlo
         static void Main (string [] args)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew ();
+
+            // var iterations = int.Parse(args[0]); 
             uint iterations = uint.Parse(Console.ReadLine ());
+
             int i = 0;
+
             int outsideCircle = 0;
             int insideCircle = 0;
+
             Random rand = new Random ();
 
+            //for loop v
             do
             {
                 Tuple<double, double> tup = RandomTuple (rand);
                 double x = tup.Item1;
                 double y = tup.Item2;
-                double hypot = Hypotenuse (x, y);
+                double hypot = Hypotenuse (x, y); // var (x,y)= RandomTuple(rand); var hypot = Hypotenuse (x,y) 
                 if (hypot > 1)
                 {
                     outsideCircle++;
@@ -30,7 +36,8 @@ namespace MonteCarlo
                 }
                 ++i;
             } while (i != iterations);
-            double calcPi = ((double)insideCircle / (double)iterations) * 4;
+            double calcPi = ((double)insideCircle / (double)iterations) * 4;// uses casting to change int to double for this calculation.
+            // you can also just multiply by 4.0 so that it forces a double type
             long piDiff = (long)Math.Abs((long)calcPi - (long)Math.PI);
             Console.WriteLine ($"Calculated Pi is {calcPi}. The difference in the calculated Pi and the provided value " +
                 $"of pi is {piDiff}");
@@ -47,7 +54,7 @@ namespace MonteCarlo
             return (retTup);
         }
 
-        //(double, double) RandomePair (Random rand) => (rand.NextDouble (), rand.NextDouble ()); better method for RandomTuple
+        //(double, double) RandomeTuple (Random rand) => (rand.NextDouble (), rand.NextDouble ()); better method for RandomTuple
         //expression body syntax method^
 
         static double Hypotenuse (double x, double y)
@@ -55,6 +62,8 @@ namespace MonteCarlo
             double hypot = Math.Sqrt (Math.Pow(x,2) + Math.Pow(y, 2));
             return hypot;
         }
+
+        // double Hypotenuse (double x, double y) => Math.Sqrt (x * x + y * y);  better method for Hypotenuse
     }
 
 }
@@ -65,7 +74,7 @@ namespace MonteCarlo
  10000 = Calculated Pi is 3.1764. The difference in the calculated Pi and the provided value of pi is 0.034807346410207
 
 
-    1. Because you're only dealing with one quadrant of the square and in order to fully find the area of the circle
+    1. Because you're only dealing with one quadrant of the square (bounded over the circle) and in order to fully find the area of the circle
         you must use the data showing how many random points were plotted inside the circle within that quadrant and 
         apply it to all four quadrants.
     2. The more data you have the more accurate your result will be.
