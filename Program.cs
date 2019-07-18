@@ -35,14 +35,7 @@ namespace MonteCarlo
             Console.WriteLine ($"Calculated Pi is {calcPi}. The difference in the calculated Pi and the provided value " +
                 $"of pi is {piDiff}");
             watch.Stop ();
-            //for (int i = 0; i < iterations; i++)
-            //{
-            //Tuple<double, double> tup = RandomTuple (rand);
-            //double x = tup.Item1;
-            //double y = tup.Item2;
-            //double hypot = Hypotenuse (x, y);
-            //Console.WriteLine ($"The hypotenuse of the triangle is {hypot}");
-            //}
+            Console.WriteLine ($"Total execution time is :{watch.ElapsedMilliseconds} ms");
         }
 
         static Tuple<double, double> RandomTuple (Random rand)
@@ -54,11 +47,8 @@ namespace MonteCarlo
             return (retTup);
         }
 
-        //static Random RandomNum ()
-        //{
-        //    Random rand = new Random ();
-        //    return rand;
-        //}
+        //(double, double) RandomePair (Random rand) => (rand.NextDouble (), rand.NextDouble ()); better method for RandomTuple
+        //expression body syntax method^
 
         static double Hypotenuse (double x, double y)
         {
