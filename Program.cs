@@ -10,7 +10,7 @@ namespace MonteCarlo
             var watch = System.Diagnostics.Stopwatch.StartNew ();
 
             // var iterations = int.Parse(args[0]); 
-            uint iterations = uint.Parse(Console.ReadLine ());
+            int iterations = int.Parse(Console.ReadLine ());
 
             int i = 0;
 
@@ -36,9 +36,9 @@ namespace MonteCarlo
                 }
                 ++i;
             } while (i != iterations);
-            double calcPi = ((double)insideCircle / (double)iterations) * 4;// uses casting to change int to double for this calculation.
+            double calcPi = (insideCircle / iterations) * 4;// uses casting to change int to double for this calculation.
             // you can also just multiply by 4.0 so that it forces a double type
-            long piDiff = (long)Math.Abs((long)calcPi - (long)Math.PI);
+            double piDiff = (calcPi > Math.PI ? calcPi - Math.PI : Math.PI - calcPi);
             Console.WriteLine ($"Calculated Pi is {calcPi}. The difference in the calculated Pi and the provided value " +
                 $"of pi is {piDiff}");
             watch.Stop ();
@@ -74,11 +74,18 @@ namespace MonteCarlo
  10000 = Calculated Pi is 3.1764. The difference in the calculated Pi and the provided value of pi is 0.034807346410207
 
 
-    1. Because you're only dealing with one quadrant of the square (bounded over the circle) and in order to fully find the area of the circle
-        you must use the data showing how many random points were plotted inside the circle within that quadrant and 
+    1. Because you're only dealing with one quadrant of the square (bounded over the circle) and in order to fully find the area of
+        the circle you must use the data showing how many random points were plotted inside the circle within that quadrant and 
         apply it to all four quadrants.
     2. The more data you have the more accurate your result will be.
-    3. No, because each time you run the program it is starting a new random number generator.
+    3. No, because each time you run the program it is using a new seed for the random number generator.
     4. 2147483647
     5. 2147483647 : Calculated Pi is 3.14155010094007. The difference in the calculated Pi and the provided value of pi is 4.25526497229711E-05
+    
+    
+    4294967295(changed iterations to uint) Calculated Pi is 3.1415778098491900157763599456.
+        The difference in the calculated Pi and the provided value of pi is:
+        0.0000148437405999842236400544(changed piDiff to decimal)
+        Total execution time is :660719 ms
+
 */
